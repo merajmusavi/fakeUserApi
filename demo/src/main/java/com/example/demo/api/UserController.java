@@ -26,7 +26,8 @@ public class UserController {
     public List<User> getAllUsers(){
         return userService.getAllUsers();
     }
-    public User getUser(UUID id){
+    @GetMapping(path = "{id}")
+    public User getUser(@PathVariable("id") UUID id){
         return userService.getUserById(id).orElse(null);
     }
 }
