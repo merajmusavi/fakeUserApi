@@ -31,11 +31,25 @@ public class FakeUserData implements UserDao {
 
     @Override
     public int deleteUserById(UUID id) {
-        return 0;
+        Optional<User> selectedUserToDelete = selectUserById(id);
+        if (selectedUserToDelete.isEmpty()){
+            return 0;
+        }else {
+            db.remove(selectedUserToDelete.get());
+            return 1;
+        }
     }
 
     @Override
     public int updateUserById(UUID id, User user) {
-        return 0;
+        return selectUserById(id).map(u ->{
+            int index = db.indexOf(user);
+            if (index>=0){
+                db.set(index,user);
+                return 1;
+            }
+            return 0;
+        })
+                .orElse(0);
     }
 }
