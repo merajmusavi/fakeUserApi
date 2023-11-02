@@ -43,9 +43,9 @@ public class FakeUserData implements UserDao {
     @Override
     public int updateUserById(UUID id, User user) {
         return selectUserById(id).map(u ->{
-            int index = db.indexOf(user);
+            int index = db.indexOf(u);
             if (index>=0){
-                db.set(index,user);
+                db.set(index,new User(id,user.getAge(),user.getName()));
                 return 1;
             }
             return 0;
