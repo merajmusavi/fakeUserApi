@@ -30,4 +30,12 @@ public class UserController {
     public User getUser(@PathVariable("id") UUID id){
         return userService.getUserById(id).orElse(null);
     }
+    @DeleteMapping(path = "{id}")
+    public  void deleteUserById(@PathVariable("id") UUID uuid){
+        userService.deleteUser(uuid);
+    }
+    @PutMapping(path = "{id}")
+    public void updateUserById(@PathVariable("id") UUID uuid,@RequestBody User user){
+        userService.updateUser(uuid,user);
+    }
 }
