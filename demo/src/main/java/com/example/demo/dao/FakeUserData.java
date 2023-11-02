@@ -17,4 +17,9 @@ public class FakeUserData implements UserDao {
         db.add(new User(id, user.getAge(), user.getName()));
         return 1;
     }
+
+    @Override
+    public List<User> selectAllUser() {
+        return db;
+    }
 }
